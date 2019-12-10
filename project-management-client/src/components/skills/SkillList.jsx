@@ -2,48 +2,48 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import AddProject from './AddProject'; // <== !!!
+import AddSkill from './AddSkill'; // <== !!!
 
-class ProjectList extends Component {
+class SkillList extends Component {
   constructor(){
       super();
-      this.state = { listOfProjects: [] };
+      this.state = { listOfSkills: [] };
   }
 
-  getAllProjects = () =>{
+  getAllSkills = () =>{
     axios.get(`http://localhost:5000/api/skills`, {withCredentials:true})
     .then(responseFromApi => {
       this.setState({
-        listOfProjects: responseFromApi.data
+        listOfSkills: responseFromApi.data
       })
     })
   }
 
   componentDidMount() {
-    this.getAllProjects();
+    this.getAllSkills();
   }
 
   render(){
     return(
       <div>
         <div style={{width: '60%', float:"left"}}>
-          { this.state.listOfProjects.map( project => {
+          { this.state.listOfSkills.map( skill => {
             return (
-              <div key={project._id}>
-                <Link to={`/skills/${project._id}`}>
-                  <h3>{project.title}</h3>
+              <div key={skill._id}>
+                <Link to={`/skills/${skill._id}`}>
+                  <h3>{skill.title}</h3>
                 </Link>
-                {/* <p style={{maxWidth: '400px'}} >{project.description} </p> */}
+                {/* <p style={{maxWidth: '400px'}} >{skill.description} </p> */}
               </div>
             )})
           }
         </div>
         <div style={{width: '40%', float:"right"}}>
-            <AddProject getData={() => this.getAllProjects()}/> {/* <== !!! */}
+            <AddSkill getData={() => this.getAllSkills()}/> {/* <== !!! */}
         </div>
       </div>
     )
   }
 }
 
-export default ProjectList;
+export default SkillList;

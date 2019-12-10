@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import EditProject from './EditProject';
+import EditSkill from './EditSkill';
 
-class ProjectDetails extends Component {
+class SkillDetails extends Component {
   constructor(props){
     super(props);
     this.state = {};
   }
 
   componentDidMount(){
-    this.getSingleProject();
+    this.getSingleSkill();
   }
 
-  getSingleProject = () => {
+  getSingleSkill = () => {
     const { params } = this.props.match;
     axios.get(`http://localhost:5000/api/skills/${params.id}`, {withCredentials:true})
     .then( responseFromApi =>{
-      const theProject = responseFromApi.data;
-      this.setState(theProject);
+      const theSkill = responseFromApi.data;
+      this.setState(theSkill);
     })
     .catch((err)=>{
         console.log(err)
@@ -27,17 +27,17 @@ class ProjectDetails extends Component {
 
   renderEditForm = () => {
     if(!this.state.title){
-      this.getSingleProject();
+      this.getSingleSkill();
     } else {
     //                                                    {...props} => so we can have 'this.props.history' in Edit.js
     //                                                                                          ^
     //                                                                                          |
-      return <EditProject theProject={this.state} getTheProject={this.getSingleProject} {...this.props} />
+      return <EditSkill theSkill={this.state} getTheSkill={this.getSingleSkill} {...this.props} />
     }
   }
 
-// DELETE PROJECT:
-  deleteProject = () => {
+// DELETE Skill:
+  deleteSkill = () => {
     const { params } = this.props.match;
     axios.delete(`http://localhost:5000/api/skills/${params.id}`, {withCredentials:true})
     .then( () =>{
@@ -54,7 +54,7 @@ class ProjectDetails extends Component {
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
         <div>{this.renderEditForm()} </div>
-        <button onClick={() => this.deleteProject()}>Delete Skill</button> {/* <== !!! */}
+        <button onClick={() => this.deleteSkill()}>Delete Skill</button> {/* <== !!! */}
         <br/>
         <Link to={'/skills'}>Back to skills</Link>
       </div>
@@ -62,4 +62,4 @@ class ProjectDetails extends Component {
   }
 }
 
-export default ProjectDetails;
+export default SkillDetails;

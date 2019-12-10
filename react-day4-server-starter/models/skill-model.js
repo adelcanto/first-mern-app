@@ -9,8 +9,9 @@ const skillSchema = new Schema({
   skillUserRating: Number,
   averageRating: Number,
   usedCounter: Number,
-  category: {type: String, required: true},
+  category: {type: String},
   location: {type: {type: String}, coordinates: [Number]},
+  skillPicture: String,
 });
 
 const Skill = mongoose.model('Skill', skillSchema);

@@ -5,13 +5,14 @@ const router = express.Router();
 
 const Skill = require('../models/skill-model');
 const User = require('../models/user-model');
+const uploader = require('../configs/cloudinary-setup')
 // <== !!!
 
 
 // POST route => to create a new skill
 
-router.post('/skills', (req, res, next) => {
-  console.log(req)
+router.post('/skills', uploader.single('skillPicture'), (req, res, next) => {
+  console.log(req.file)
   Skill.create({
       title: req.body.title,
       description: req.body.description,
@@ -20,6 +21,7 @@ router.post('/skills', (req, res, next) => {
       averageRating: 0,
       usedCounter: 0,
       category: req.body.category,
+      skillPicture: req.body.skillPicture
       // location: PENDIENTE
     })
     .then(response => {

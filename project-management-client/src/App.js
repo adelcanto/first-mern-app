@@ -2,15 +2,13 @@ import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom'
 
-import ProjectList from './components/projects/ProjectList';
+import SkillList from './components/skills/SkillList';
 import Navbar from './components/navbar/Navbar';
-import ProjectDetails from './components/projects/ProjectDetails';
+import SkillDetails from './components/skills/SkillDetails';
 import Signup from './components/auth/Signup';
 import AuthService from './components/auth/auth-service';
 import Login from './components/auth/Login';
 import ProtectedRoute from './components/auth/protected-route';
-
-
 
 class App extends React.Component {
   constructor(props) {
@@ -48,8 +46,8 @@ class App extends React.Component {
         <div className="App">
           <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}  />
           <Switch>
-            <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={ProjectDetails} />
-            <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={ProjectList} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={SkillDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={SkillList} />
           </Switch>
         </div>
       );
@@ -60,8 +58,8 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />
             <Route exact path='/' render={() => <Login getUser={this.getTheUser} />} />
-            <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={ProjectDetails} />
-            <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={ProjectList} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={SkillDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={SkillList} />
           </Switch>
         </div>
       );

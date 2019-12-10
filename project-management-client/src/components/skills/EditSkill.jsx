@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class EditProject extends Component {
+class EditSkill extends Component {
   constructor(props){
     super(props);
     this.state = {
-        title: this.props.theProject.title, 
-        description: this.props.theProject.description
+        title: this.props.theSkill.title, 
+        description: this.props.theSkill.description
     }
   }
 
@@ -17,10 +17,10 @@ class EditProject extends Component {
 
     event.preventDefault();
 
-    axios.put(`http://localhost:5000/api/skills/${this.props.theProject._id}`, { title, description }, {withCredentials:true})
+    axios.put(`http://localhost:5000/api/skills/${this.props.theSkill._id}`, { title, description }, {withCredentials:true})
     .then( () => {
-        this.props.getTheProject();
-        // after submitting the form, redirect to '/projects'
+        this.props.getTheSkill();
+        // after submitting the form, redirect to '/Skills'
         this.props.history.push('/skills');    
     })
     .catch( error => console.log(error) )
@@ -49,6 +49,7 @@ class EditProject extends Component {
           <label>Description:</label>
           <textarea name="description" value={this.state.description} onChange={e => this.handleChangeDesc(e)} />
           
+          
           <input type="submit" value="Submit" />
         </form>
       </div>
@@ -56,4 +57,4 @@ class EditProject extends Component {
   }
 }
 
-export default EditProject;
+export default EditSkill;
