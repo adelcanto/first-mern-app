@@ -8,6 +8,7 @@ import ProjectDetails from './components/projects/ProjectDetails';
 import Signup from './components/auth/Signup';
 import AuthService from './components/auth/auth-service';
 import Login from './components/auth/Login';
+import ProtectedRoute from './components/auth/protected-route';
 
 
 
@@ -45,22 +46,22 @@ class App extends React.Component {
     if (this.state.loggedInUser) {
       return (
         <div className="App">
-          <Navbar userInSession={this.state.loggedInUser} />
+          <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}  />
           <Switch>
-            <Route exact path="/projects" component={ProjectList} />
-            <Route exact path="/projects/:id" component={ProjectDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} />
           </Switch>
         </div>
       );
     } else {
       return (
         <div className="App">
-          <Navbar userInSession={this.state.loggedInUser} />
+          <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}  />
           <Switch>
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />
             <Route exact path='/' render={() => <Login getUser={this.getTheUser} />} />
-            <Route exact path="/projects" component={ProjectList} />
-            <Route exact path="/projects/:id" component={ProjectDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} />
           </Switch>
         </div>
       );

@@ -10,8 +10,9 @@ class AuthService {
   }
 
   signup = (username, password) => {
-    return this.service.post('/signup', { username, password })
-      .then(response => response.data)
+    return this.service.post('/signup', { username, password})
+      .then(response => Promise.resolve(response.data))
+      // .catch(error => console.error("error")) 
   }
 
   loggedin = () => {
@@ -27,7 +28,13 @@ class AuthService {
   logout = () => {
     return this.service.post('/logout', {})
     .then(response => response.data)
-  }  
+  }
+
+  // upload = (picture) => {
+  //   return this.service.post('/upload', picture)
+  //   .then(res => Promise.resolve(res.data))
+  //   .catch(error => console.error(error))
+  // }
 
 }
 

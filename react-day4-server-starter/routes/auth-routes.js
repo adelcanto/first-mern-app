@@ -6,11 +6,11 @@ const bcrypt     = require('bcryptjs');
 
 // require the user model !!!!
 const User       = require('../models/user-model');
+const uploader = require('../configs/cloudinary-setup');
 
 
 authRoutes.post('/signup', (req, res, next) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const {username, password} = req.body
   
     if (!username || !password) {
       res.status(400).json({ message: 'Provide username and password' });
@@ -39,7 +39,7 @@ authRoutes.post('/signup', (req, res, next) => {
   
         const aNewUser = new User({
             username:username,
-            password: hashPass
+            password: hashPass,
         });
   
         aNewUser.save(err => {
@@ -60,6 +60,7 @@ authRoutes.post('/signup', (req, res, next) => {
                 // Send the user's information to the frontend
                 // We can use also: res.status(200).json(req.user);
                 res.status(200).json(aNewUser);
+                debugger;
             });
         });
     });
@@ -107,6 +108,15 @@ authRoutes.get('/loggedin', (req, res, next) => {
     }
     res.status(403).json({ message: 'Unauthorized' });
 });
+
+// authRoutes.post('/upload', uploader.single('picture'), (req, res) => {
+    
+//     if(req.file) {
+//         res.status(200).json({secure_url: req.file.secure_url})  
+//     } else {
+//         res.status(500).json({message: 'Somthing went wrong'})
+//     }
+// })
 
 
 module.exports = authRoutes;

@@ -89,7 +89,7 @@ app.use('/', index);
 
 app.use('/api', require('./routes/project-routes'));
 app.use('/api', require('./routes/task-routes'));
-
 app.use('/api', require('./routes/auth-routes'))
+// app.use('/api', require('./routes/file-upload-routes'));
 
 module.exports = app;

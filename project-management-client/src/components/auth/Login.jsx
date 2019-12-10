@@ -18,7 +18,7 @@ class Login extends Component {
         this.setState({ username: "", password: "" });
         this.props.getUser(response)
     })
-    .catch( error => console.log(error) )
+    .catch( error => alert(error.response.data.message) )
   }
     
   handleChange = (event) => {  
