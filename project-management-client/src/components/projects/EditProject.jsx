@@ -17,11 +17,11 @@ class EditProject extends Component {
 
     event.preventDefault();
 
-    axios.put(`http://localhost:5000/api/projects/${this.props.theProject._id}`, { title, description }, {withCredentials:true})
+    axios.put(`http://localhost:5000/api/skills/${this.props.theProject._id}`, { title, description }, {withCredentials:true})
     .then( () => {
         this.props.getTheProject();
         // after submitting the form, redirect to '/projects'
-        this.props.history.push('/projects');    
+        this.props.history.push('/skills');    
     })
     .catch( error => console.log(error) )
   }
@@ -42,7 +42,7 @@ class EditProject extends Component {
     return (
       <div>
         <hr />
-        <h3>Edit form</h3>
+        <h3>Edit Skill</h3>
         <form onSubmit={this.handleFormSubmit}>
           <label>Title:</label>
           <input type="text" name="title" value={this.state.title} onChange={e => this.handleChangeTitle(e)}/>

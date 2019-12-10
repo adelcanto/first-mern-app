@@ -15,7 +15,7 @@ class ProjectDetails extends Component {
 
   getSingleProject = () => {
     const { params } = this.props.match;
-    axios.get(`http://localhost:5000/api/projects/${params.id}`, {withCredentials:true})
+    axios.get(`http://localhost:5000/api/skills/${params.id}`, {withCredentials:true})
     .then( responseFromApi =>{
       const theProject = responseFromApi.data;
       this.setState(theProject);
@@ -39,9 +39,9 @@ class ProjectDetails extends Component {
 // DELETE PROJECT:
   deleteProject = () => {
     const { params } = this.props.match;
-    axios.delete(`http://localhost:5000/api/projects/${params.id}`, {withCredentials:true})
+    axios.delete(`http://localhost:5000/api/skills/${params.id}`, {withCredentials:true})
     .then( () =>{
-        this.props.history.push('/projects'); // !!!         
+        this.props.history.push('/skills'); // !!!         
     })
     .catch((err)=>{
         console.log(err)
@@ -54,9 +54,9 @@ class ProjectDetails extends Component {
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
         <div>{this.renderEditForm()} </div>
-        <button onClick={() => this.deleteProject()}>Delete project</button> {/* <== !!! */}
+        <button onClick={() => this.deleteProject()}>Delete Skill</button> {/* <== !!! */}
         <br/>
-        <Link to={'/projects'}>Back to projects</Link>
+        <Link to={'/skills'}>Back to skills</Link>
       </div>
     )
   }

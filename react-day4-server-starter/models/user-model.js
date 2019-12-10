@@ -8,7 +8,8 @@ const userSchema = new Schema({
   skills: [{type: Schema.Types.ObjectId, ref:"skill-model"}],
   email: { type: String, default: 'email@email.com'},
   credit: { type: Number, default: 1},
-  city: { type: String, default: 'City'}
+  city: { type: String, default: 'City'},
+  counter: Number
 }, 
 {
   timestamps: true

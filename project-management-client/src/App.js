@@ -48,8 +48,8 @@ class App extends React.Component {
         <div className="App">
           <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}  />
           <Switch>
-            <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
-            <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={ProjectDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={ProjectList} />
           </Switch>
         </div>
       );
@@ -60,8 +60,8 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />
             <Route exact path='/' render={() => <Login getUser={this.getTheUser} />} />
-            <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
-            <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={ProjectDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={ProjectList} />
           </Switch>
         </div>
       );

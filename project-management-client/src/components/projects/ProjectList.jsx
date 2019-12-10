@@ -11,7 +11,7 @@ class ProjectList extends Component {
   }
 
   getAllProjects = () =>{
-    axios.get(`http://localhost:5000/api/projects`, {withCredentials:true})
+    axios.get(`http://localhost:5000/api/skills`, {withCredentials:true})
     .then(responseFromApi => {
       this.setState({
         listOfProjects: responseFromApi.data
@@ -30,7 +30,7 @@ class ProjectList extends Component {
           { this.state.listOfProjects.map( project => {
             return (
               <div key={project._id}>
-                <Link to={`/projects/${project._id}`}>
+                <Link to={`/skills/${project._id}`}>
                   <h3>{project.title}</h3>
                 </Link>
                 {/* <p style={{maxWidth: '400px'}} >{project.description} </p> */}

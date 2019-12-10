@@ -87,8 +87,8 @@ app.use(cors({
 const index = require('./routes/index');
 app.use('/', index);
 
-app.use('/api', require('./routes/project-routes'));
-app.use('/api', require('./routes/task-routes'));
+app.use('/api', require('./routes/skill-routes'));
+
 app.use('/api', require('./routes/auth-routes'))
 // app.use('/api', require('./routes/file-upload-routes'));
 
