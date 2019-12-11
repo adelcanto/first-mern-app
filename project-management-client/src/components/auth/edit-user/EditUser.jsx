@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import AuthService from './auth-service';
+import AuthService from '../auth-service';
 
 export default class EditUser extends Component {
     constructor(props) {

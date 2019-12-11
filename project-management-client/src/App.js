@@ -3,13 +3,14 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom'
 
 import SkillList from './components/skills/SkillList';
-import EditUser from './components/auth/EditUser'
+import EditUser from './components/auth/edit-user/EditUser'
 import Navbar from './components/navbar/Navbar';
 import SkillDetails from './components/skills/SkillDetails';
-import Signup from './components/auth/Signup';
+import Signup from './components/auth/signup/Signup';
 import AuthService from './components/auth/auth-service';
-import Login from './components/auth/Login';
+import Login from './components/auth/login/Login';
 import ProtectedRoute from './components/auth/protected-route';
+import Home from './components/home/Home';
 
 class App extends React.Component {
   constructor(props) {
@@ -59,10 +60,11 @@ class App extends React.Component {
           <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}  />
           <Switch>
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />
-            <Route exact path='/' render={() => <Login getUser={this.getTheUser} />} />
-            <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={SkillDetails} />
+            <Route exact path='/login' render={() => <Login getUser={this.getTheUser} />} />
+            <Route exact path='/' render={() => <Home />} />
+            {/* <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={SkillDetails} />
             <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={SkillList} />
-            <ProtectedRoute userInSession={this.state.loggedInUser} path='/:id' component={EditUser} />
+            <ProtectedRoute userInSession={this.state.loggedInUser} path='/:id' component={EditUser} /> */}
           </Switch>
         </div>
       );
