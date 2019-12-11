@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AuthService from '../auth/auth-service'
 
 
 class AddSkill extends Component {
   constructor(props){
       super(props);
       this.state = { title: "", description: "", category: "", skillPicture:""};
+      this.service = new AuthService()
   }
    
   handleFormSubmit = (event) => {
@@ -28,6 +30,20 @@ class AddSkill extends Component {
       this.setState({[name]: value});
   }
 
+  handleFileUpload = (e) => { 
+    const uploadData = new FormData();
+  
+    uploadData.append('skillPicture', e.target.files[0])
+    
+    this.service.handleUpload(uploadData)
+    .then(response => {
+      this.setState({...this.state, skillPicture: response.secure_url})
+    })
+    .catch(err => {
+      console.log("Error while uploading the file: ", err)
+    })
+  }
+
   render(){
     return(
       <div>
@@ -42,7 +58,7 @@ class AddSkill extends Component {
           <textarea name="category" value={this.state.category} onChange={ e => this.handleChange(e)} />
           <br/>
           <label>Picture:</label>
-          <input type="file" name="picture" value={this.state.skillPicture} onChange={ e => this.handleChange(e)}/>
+          <input type="file" onChange={ e => this.handleFileUpload(e)}/>
           <br/>
           <input type="submit" value="Submit" />
         </form>

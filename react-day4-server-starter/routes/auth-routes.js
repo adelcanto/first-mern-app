@@ -4,8 +4,11 @@ const authRoutes = express.Router();
 const passport   = require('passport');
 const bcrypt     = require('bcryptjs');
 
+const mongoose = require('mongoose');
+
 // require the user model !!!!
 const User       = require('../models/user-model');
+const Skills      = require('../models/skill-model')
 const uploader = require('../configs/cloudinary-setup');
 
 
@@ -38,7 +41,7 @@ authRoutes.post('/signup', (req, res, next) => {
         const hashPass = bcrypt.hashSync(password, salt);
   
         const aNewUser = new User({
-            username:username,
+            username: username,
             password: hashPass,
         });
   
@@ -88,7 +91,14 @@ authRoutes.post('/login', (req, res, next) => {
             }
 
             // We are now logged in (that's why we can also send req.user)
-            res.status(200).json(theUser);
+            
+            User.findById(theUser._id)
+            .populate('skills')
+            .then((user) => {
+                console.log(user)
+                res.status(200).json(user);
+            })
+            
         });
     })(req, res, next);
 });
@@ -109,14 +119,35 @@ authRoutes.get('/loggedin', (req, res, next) => {
     res.status(403).json({ message: 'Unauthorized' });
 });
 
-// authRoutes.post('/upload', uploader.single('picture'), (req, res) => {
-    
-//     if(req.file) {
-//         res.status(200).json({secure_url: req.file.secure_url})  
-//     } else {
-//         res.status(500).json({message: 'Somthing went wrong'})
-//     }
-// })
+authRoutes.put('/:id', (req, res, next) => {
+
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(400).json({
+        message: 'Specified id is not valid'
+      });
+      return;
+    }
+  
+    User.findByIdAndUpdate(req.params.id, req.body)
+      .then(() => {
+        res.json({
+          message: `User with ${req.params.id} is updated successfully.`
+        });
+      })
+      .catch(err => {
+        res.json(err);
+      })
+  })
+
+  authRoutes.post('/uploadUserPic', uploader.single("picture"), (req, res, next) => {
+
+    if (!req.file) {
+        next(new Error('No file uploaded!'));
+        return;
+    }
+  
+    res.json({ secure_url: req.file.secure_url });
+  })
 
 
 module.exports = authRoutes;

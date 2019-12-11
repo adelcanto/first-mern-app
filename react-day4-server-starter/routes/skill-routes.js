@@ -11,8 +11,9 @@ const uploader = require('../configs/cloudinary-setup')
 
 // POST route => to create a new skill
 
-router.post('/skills', uploader.single('skillPicture'), (req, res, next) => {
-  console.log(req.file)
+router.post('/skills', (req, res, next) => {
+  const userId = req.user._id
+  // console.log(userId)
   Skill.create({
       title: req.body.title,
       description: req.body.description,
@@ -23,6 +24,11 @@ router.post('/skills', uploader.single('skillPicture'), (req, res, next) => {
       category: req.body.category,
       skillPicture: req.body.skillPicture
       // location: PENDIENTE
+    })
+    .then(response => { 
+      User.findByIdAndUpdate({_id: response.owner}, {$push: {skills: response._id}})
+      .then((userFound) => console.log(userFound))
+      return response
     })
     .then(response => {
       res.json(response);
@@ -103,6 +109,16 @@ router.delete('/skills/:id', (req, res, next) => {
     .catch(err => {
       res.json(err);
     })
+})
+
+router.post('/upload', uploader.single("skillPicture"), (req, res, next) => {
+
+  if (!req.file) {
+      next(new Error('No file uploaded!'));
+      return;
+  }
+
+  res.json({ secure_url: req.file.secure_url });
 })
 
 module.exports = router;

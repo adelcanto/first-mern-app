@@ -11,7 +11,7 @@ const skillSchema = new Schema({
   usedCounter: Number,
   category: {type: String},
   location: {type: {type: String}, coordinates: [Number]},
-  skillPicture: String,
+  skillPicture: { type: String, default: 'https://i.stack.imgur.com/l60Hf.png' }
 });
 
 const Skill = mongoose.model('Skill', skillSchema);

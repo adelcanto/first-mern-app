@@ -29,6 +29,7 @@ class Navbar extends Component {
           <ul>
             <li>Welcome, {this.state.loggedInUser.username}</li>
             <li><Link to='/skills' style={{ textDecoration: 'none' }}>Skills</Link></li>
+            <li><Link to={`/${this.state.loggedInUser._id}`} style={{ textDecoration: 'none' }}>Edit User</Link></li>
             <li>
               <Link to='/'>
                 <button onClick={() => this.logoutUser()}>Logout</button>

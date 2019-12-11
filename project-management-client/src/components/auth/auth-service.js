@@ -30,6 +30,19 @@ class AuthService {
     .then(response => response.data)
   }
 
+  handleUpload = (picture) => {
+    return this.service.post('/upload', picture)
+    .then(res => res.data)
+    .catch(err => console.error(err))
+  }
+
+  handleUserPicUpload = (picture) => {
+    return this.service.post('/uploadUserPic', picture)
+    .then(res => res.data)
+    .catch(err => console.error(err))
+  }
+
+
   // upload = (picture) => {
   //   return this.service.post('/upload', picture)
   //   .then(res => Promise.resolve(res.data))

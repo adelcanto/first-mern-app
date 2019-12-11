@@ -23,7 +23,7 @@ class Signup extends Component {
         this.setState({
           username: "",
           password: "",
-
+  
         });
         this.props.getUser(response)
       })

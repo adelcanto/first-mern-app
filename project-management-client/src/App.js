@@ -3,6 +3,7 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom'
 
 import SkillList from './components/skills/SkillList';
+import EditUser from './components/auth/EditUser'
 import Navbar from './components/navbar/Navbar';
 import SkillDetails from './components/skills/SkillDetails';
 import Signup from './components/auth/Signup';
@@ -48,6 +49,7 @@ class App extends React.Component {
           <Switch>
             <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={SkillDetails} />
             <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={SkillList} />
+            <ProtectedRoute user={this.state.loggedInUser} getUser={this.getTheUser} path='/:id' component={EditUser} />
           </Switch>
         </div>
       );
@@ -60,6 +62,7 @@ class App extends React.Component {
             <Route exact path='/' render={() => <Login getUser={this.getTheUser} />} />
             <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={SkillDetails} />
             <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={SkillList} />
+            <ProtectedRoute userInSession={this.state.loggedInUser} path='/:id' component={EditUser} />
           </Switch>
         </div>
       );
