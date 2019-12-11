@@ -11,6 +11,7 @@ import AuthService from './components/auth/auth-service';
 import Login from './components/auth/login/Login';
 import ProtectedRoute from './components/auth/protected-route';
 import Home from './components/home/Home';
+import Dashboard from './components/auth/dashboard/Dashboard';
 
 class App extends React.Component {
   constructor(props) {
@@ -48,6 +49,7 @@ class App extends React.Component {
         <div className="App">
           <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}  />
           <Switch>
+            <ProtectedRoute user={this.state.loggedInUser} path='/dashboard' component={Dashboard} />
             <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={SkillDetails} />
             <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={SkillList} />
             <ProtectedRoute user={this.state.loggedInUser} getUser={this.getTheUser} path='/:id' component={EditUser} />
