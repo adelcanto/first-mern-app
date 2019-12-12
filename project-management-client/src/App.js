@@ -14,6 +14,8 @@ import Home from './components/home/Home';
 import Dashboard from './components/auth/dashboard/Dashboard';
 import AddSkill from './components/skills/AddSkill';
 import SearchBoxResults from './components/search-box/SearchBoxResults';
+import CategoryDetails from './components/category/CategoryDetails';
+import Footer from './components/footer/Footer';
 
 class App extends React.Component {
   constructor(props) {
@@ -51,15 +53,16 @@ class App extends React.Component {
         <div className="App">
           <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
-          <ProtectedRoute user={this.state.loggedInUser} exact path='/search-results' component={SearchBoxResults} />
+            <ProtectedRoute user={this.state.loggedInUser} exact path='/search-results' component={SearchBoxResults} />
             <ProtectedRoute user={this.state.loggedInUser} path='/dashboard' component={Dashboard} />
             <ProtectedRoute user={this.state.loggedInUser} path='/login' component={Dashboard} />
-            <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={SkillDetails} />
-            <ProtectedRoute exact user={this.state.loggedInUser} path='/new/skill' component={AddSkill} />
-            <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={SkillList} />
+            <ProtectedRoute user={this.state.loggedInUser} exact path='/skills/:id' component={SkillDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} exact path='/skills/category/:name' component={CategoryDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} exact path='/new/skill' component={AddSkill} />
+            <ProtectedRoute user={this.state.loggedInUser} exact path='/skills' component={SkillList} />
             <ProtectedRoute user={this.state.loggedInUser} getUser={this.getTheUser} path='/:id' component={EditUser} />
-            
           </Switch>
+          <Footer />
         </div>
       );
     } else {
@@ -75,6 +78,7 @@ class App extends React.Component {
             <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={SkillList} />
             <ProtectedRoute userInSession={this.state.loggedInUser} path='/:id' component={EditUser} /> */}
           </Switch>
+          <Footer />
         </div>
       );
     }

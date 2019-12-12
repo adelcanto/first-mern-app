@@ -25,6 +25,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	
+	/* position: relative;
+	min-height: 100vh; */
+	
 }
 ol, ul {
 	list-style: none;
@@ -42,3 +46,8 @@ table {
 	border-spacing: 0;
 }
 
+.App {
+	display:flex;
+	min-height: 100vh;
+	flex-wrap: wrap;
+}

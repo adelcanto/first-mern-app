@@ -47,9 +47,33 @@ const DashboardTag = styled.div`
             margin-bottom: 1rem;
         }
 
+        .category-links {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+
+            li {
+                width: 8rem;
+                height: 8rem;
+                margin: .5rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                
+                border: 1px solid grey;
+                border-radius: 50%
+                img {
+                    width: 3rem;
+                }
+
+            }
+        }
+
         div {
             width: 100%;
             ul {
+
                 li {
                     display: flex;
                 }

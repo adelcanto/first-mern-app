@@ -28,7 +28,7 @@ export default class SearchBox extends Component {
     searchSkill(e) {
         let newArr = [...this.state.listOfSkills];
         let filteredSkills = newArr.filter(skill =>
-            skill.title.toLowerCase().includes(e.target.value.toLowerCase())
+            skill.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
         )
         if(e.target.value){
             this.setState({

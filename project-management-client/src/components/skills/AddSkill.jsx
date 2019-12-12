@@ -55,7 +55,14 @@ class AddSkill extends Component {
           <textarea name="description" value={this.state.description} onChange={ e => this.handleChange(e)} />
           <br/>
           <label>Category:</label>
-          <textarea name="category" value={this.state.category} onChange={ e => this.handleChange(e)} />
+          <select name="category" value={this.state.category} onChange={ e => this.handleChange(e)}>
+            <option value="music">Música</option>
+            <option value="sports">Deporte</option>
+            <option value="education ">Educación</option>
+            <option value="cuisine">Cocina</option>
+            <option value="languages">Idiomas</option>
+            <option value="other">Otros</option>
+          </select>
           <br/>
           <label>Picture:</label>
           <input type="file" onChange={ e => this.handleFileUpload(e)}/>
