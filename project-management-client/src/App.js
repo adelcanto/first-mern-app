@@ -13,6 +13,7 @@ import ProtectedRoute from './components/auth/protected-route';
 import Home from './components/home/Home';
 import Dashboard from './components/auth/dashboard/Dashboard';
 import AddSkill from './components/skills/AddSkill';
+import SearchBoxResults from './components/search-box/SearchBoxResults';
 
 class App extends React.Component {
   constructor(props) {
@@ -48,22 +49,25 @@ class App extends React.Component {
     if (this.state.loggedInUser) {
       return (
         <div className="App">
-          <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}  />
+          <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
+          <ProtectedRoute user={this.state.loggedInUser} exact path='/search-results' component={SearchBoxResults} />
             <ProtectedRoute user={this.state.loggedInUser} path='/dashboard' component={Dashboard} />
             <ProtectedRoute user={this.state.loggedInUser} path='/login' component={Dashboard} />
             <ProtectedRoute user={this.state.loggedInUser} path='/skills/:id' component={SkillDetails} />
             <ProtectedRoute exact user={this.state.loggedInUser} path='/new/skill' component={AddSkill} />
             <ProtectedRoute user={this.state.loggedInUser} path='/skills' component={SkillList} />
             <ProtectedRoute user={this.state.loggedInUser} getUser={this.getTheUser} path='/:id' component={EditUser} />
+            
           </Switch>
         </div>
       );
     } else {
       return (
         <div className="App">
-          <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}  />
+          <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
+            <Route path='/search-results' component={SearchBoxResults} />
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser} />} />
             <Route exact path='/' render={() => <Home />} />

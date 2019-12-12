@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AuthService from '../auth/auth-service';
 
 import NavBar from './NavbarStyles'
+import SearchBox from '../search-box/SearchBox';
 
 
 class Navbar extends Component {
@@ -28,6 +29,7 @@ class Navbar extends Component {
     if (this.state.loggedInUser) {
       return (
         <NavBar>
+            <SearchBox/>
             <ul>
               <li><Link to='/dashboard'>Panel de Usuario</Link></li>
               <li>Welcome, {this.state.loggedInUser.username}</li>
@@ -45,6 +47,7 @@ class Navbar extends Component {
     } else {
       return (
         <NavBar>
+          <SearchBox/>
           <ul>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/login' style={{ textDecoration: 'none' }}>Login</Link></li>

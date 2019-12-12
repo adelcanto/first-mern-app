@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 const NavBar = styled.div`
     background-color: lightblue;
+    display:flex;
+    justify-content: space-between;
     
     ul {
         display: flex;
