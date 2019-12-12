@@ -19,8 +19,8 @@ class AddSkill extends Component {
     // const {title, description, category} = this.state
     axios.post("http://localhost:5000/api/skills", { title, description, category, skillPicture}, {withCredentials:true})
     .then( () => {
-        this.props.getData();
         this.setState({title: "", description: "", category: "" , skillPicture:""});
+        this.props.history.push('/dashboard'); 
     })
     .catch( error => console.log(error) )
   }
@@ -60,7 +60,7 @@ class AddSkill extends Component {
           <label>Picture:</label>
           <input type="file" onChange={ e => this.handleFileUpload(e)}/>
           <br/>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Añadir Habilidad" />
         </form>
       </div>
     )

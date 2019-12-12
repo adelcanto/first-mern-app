@@ -95,7 +95,7 @@ authRoutes.post('/login', (req, res, next) => {
             User.findById(theUser._id)
             .populate('skills')
             .then((user) => {
-                console.log(user)
+                
                 res.status(200).json(user);
             })
             

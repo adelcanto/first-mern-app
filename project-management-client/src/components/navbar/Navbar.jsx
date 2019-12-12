@@ -31,7 +31,7 @@ class Navbar extends Component {
             <ul>
               <li><Link to='/dashboard'>Panel de Usuario</Link></li>
               <li>Welcome, {this.state.loggedInUser.username}</li>
-              <li><Link to='/skills' style={{ textDecoration: 'none' }}>Añadir Habilidad</Link></li>
+              <li><Link to='/new/skill' style={{ textDecoration: 'none' }}>Añadir Habilidad</Link></li>
               <li><Link to={`/${this.state.loggedInUser._id}`} style={{ textDecoration: 'none' }}>Editar Usuario</Link></li>
               <li>
                 <Link to='/'>

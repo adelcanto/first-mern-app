@@ -27,7 +27,7 @@ class EditSkill extends Component {
     .then( () => {
         this.props.getTheSkill();
         // after submitting the form, redirect to '/Skills'
-        this.props.history.push('/skills');    
+        this.props.history.push('/dashboard');    
     })
     .catch( error => console.log(error) )
   }

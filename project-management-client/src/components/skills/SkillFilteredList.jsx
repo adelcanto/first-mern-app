@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 
 import AddSkill from './AddSkill'; // <== !!!
 import SkillCard from './skill-card/SkillCard';
-import SkillListTag from './SkillStyles/SkillListStyles';
+import SkillFilteredListTag from './SkillStyles/SkillListStyles';
 
 
-class SkillList extends Component {
-  constructor() {
-    super();
-    this.state = { listOfSkills: [] };
+class SkillFilteredList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { ...this.props.theUser, listOfSkills: [] };
   }
 
   getAllSkills = () => {
@@ -27,10 +27,13 @@ class SkillList extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
-      <SkillListTag>
+      <SkillFilteredListTag>
         <ul>
-          {this.state.listOfSkills.map(skill => {
+          {this.state.listOfSkills.filter(skill => 
+            skill.owner === this.state._id
+          ).map(skill => {
             return (
               <li key={skill._id}>
                 <Link to={`/skills/${skill._id}`}>
@@ -41,14 +44,11 @@ class SkillList extends Component {
           })
           }
         </ul>
-        {/* <div style={{width: '40%', float:"right"}}>
-            <AddSkill getData={() => this.getAllSkills()}/> 
-        </div> */}
-
-      </SkillListTag>
+      </SkillFilteredListTag>
+    
 
     )
   }
 }
 
-export default SkillList;
+export default SkillFilteredList;

@@ -17,8 +17,10 @@ export default class EditUser extends Component {
         axios.put(`http://localhost:5000/api/${this.props.loggedInUser._id}`, {username, picture, email, city} , {withCredentials:true})
         .then( ()=> {
             this.setState({username: username, picture: picture, email: email, city: city});
-            this.props.history.push('/skills')
         })
+        .then(() => {
+            // debugger;
+            this.props.history.push('/dashboard')})
         .catch(error => console.log(error))
     }
 
