@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom'
 
+
 import SkillList from './components/skills/SkillList';
 import EditUser from './components/auth/edit-user/EditUser'
 import Navbar from './components/navbar/Navbar';
