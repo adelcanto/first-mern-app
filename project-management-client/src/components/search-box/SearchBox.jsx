@@ -32,7 +32,7 @@ export default class SearchBox extends Component {
         )
         if(e.target.value){
             this.setState({
-                ...this.state,
+                ...this.state,  
                 skillsToFilter: filteredSkills
             })
         } else {
@@ -46,7 +46,7 @@ export default class SearchBox extends Component {
     render() {
         return (
             <SearchBoxTag>
-                <input onChange={(e) => { this.searchSkill(e) }} />
+                <input className="input is-primary" onChange={(e) => { this.searchSkill(e) }} />
                 {/* {this.state.skillsToFilter.map((initialSkill, idx) => <div key={idx}> {initialSkill.title}</div>)} */}
                 <Link to={{
                     pathname: '/search-results',

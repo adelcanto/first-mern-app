@@ -29,25 +29,34 @@ class Navbar extends Component {
     if (this.state.loggedInUser) {
       return (
         <NavBar>
+        {/* <nav className="navbar is-danger is-full" role="navigation" aria-label="main navigation"> */}
+          <div className="navbar-item">
             <SearchBox/>
-            <ul>
-              <li><Link to='/dashboard'>Panel de Usuario</Link></li>
-              <li>Welcome, {this.state.loggedInUser.username}</li>
-              <li><Link to='/new/skill' style={{ textDecoration: 'none' }}>Añadir Habilidad</Link></li>
-              <li><Link to={`/${this.state.loggedInUser._id}`} style={{ textDecoration: 'none' }}>Editar Usuario</Link></li>
-              <li>
-                <Link to='/'>
-                  <button onClick={() => this.logoutUser()}>Logout</button>
-                </Link>
-              </li>
-            </ul>
+          </div>
+
+          <div className="navbar-menu">
+            <Link className="navbar-item" to='/dashboard'>Panel de Usuario</Link>
+            <div className="navbar-item">Welcome, {this.state.loggedInUser.username}</div>
+            <Link className="navbar-item" to='/new/skill' style={{ textDecoration: 'none' }}>Añadir Habilidad</Link>
+            <Link className="navbar-item" to={`/${this.state.loggedInUser._id}`} style={{ textDecoration: 'none' }}>Editar Usuario</Link>
+          </div>
+
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <Link to='/'>
+                <button className="button is-link" onClick={() => this.logoutUser()}>Logout</button>
+              </Link>
+            </div>
+          </div>
+        {/* </nav> */}
+
         </NavBar>
 
       )
     } else {
       return (
         <NavBar>
-          <SearchBox/>
+          <SearchBox />
           <ul>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/login' style={{ textDecoration: 'none' }}>Login</Link></li>
